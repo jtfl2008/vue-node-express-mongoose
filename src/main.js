@@ -3,6 +3,9 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import api from './api/api.js'
+
+Vue.prototype.$ajax = api
 
 Vue.config.productionTip = false
 
