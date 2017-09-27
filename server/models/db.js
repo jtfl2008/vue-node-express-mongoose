@@ -1,8 +1,9 @@
 const mongoose = require('mongoose')
+const config = require('../config/config.js')
 mongoose.Promise = global.Promise
-const DB_URL = 'mongodb://localhost:27017/db'
+const DB_URL = config.DB_URL
 
-mongoose.connect(DB_URL)
+mongoose.connect(DB_URL, { useMongoClient: true })
 
 mongoose.connection.on('connect', function () {
   console.log('Mongoose connection open to ' + DB_URL)
@@ -16,4 +17,4 @@ mongoose.connection.on('disconnected', function () {
   console.log('Mongoose connection disconnected')
 })
 
-mongoose.exports = mongoose
+module.exports = mongoose
