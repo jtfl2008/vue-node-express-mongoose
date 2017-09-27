@@ -1,13 +1,16 @@
 const express = require('express')
+const config = require('./config/config.js')
 const bodyParser = require('body-parser')
 
+const index = require('./router/index.js')
+const item = require('./router/lists.js')
+
+const port = config.port
 const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
-app.use('/', (req, res) => {
-  res.send('Yes!')
-})
+app.use('/api', index)
 
-app.listen(3000, () => {
-  console.log('app listening in 3000')
+app.listen(port, () => {
+  console.log('app listening in ' + port)
 })
