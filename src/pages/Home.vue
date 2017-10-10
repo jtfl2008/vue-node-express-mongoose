@@ -1,11 +1,6 @@
 <template>
   <div class="home">
-
-    <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal">
-      <el-menu-item index="1">首页</el-menu-item>
-      <el-menu-item index="2">登录</el-menu-item>
-      <el-menu-item index="3">注册</el-menu-item>
-    </el-menu>
+    <v-header></v-header>
     <div class="head">
       <el-row>
         <!-- <el-col :span="2">
@@ -155,10 +150,12 @@
            </span>
          </el-dialog>
     </div>
+
   </div>
 </template>
 
 <script>
+import Header from '../components/header.vue'
 export default {
   name: 'home',
   data () {
@@ -185,7 +182,7 @@ export default {
       addMovieRules: {
         title: [
           { required: true, message: '请输入名称', trigger: 'blur' },
-          { min: 3, max: 15, message: '长度在 3 到 15 个字符', trigger: 'blur' }
+          { min: 3, max: 35, message: '长度在 3 到 15 个字符', trigger: 'blur' }
         ],
         cover: [
           { required: true, message: '请输入名称', trigger: 'blur' },
@@ -205,6 +202,9 @@ export default {
       total: 0,
       currentPage: 1
     }
+  },
+  components: {
+    vHeader: Header
   },
   mounted () {
     this.getLists()
@@ -274,7 +274,7 @@ export default {
     },
     // 反显
     editMovieDialog (index, row) {
-      this.id = row._id
+      this.id = row.id
       this.dialogVisibleUpdateMovie = true
       let params = {
         id: this.id

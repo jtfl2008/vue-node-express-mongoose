@@ -1,15 +1,28 @@
+<script src="../../.eslintrc.js"></script>
 <template>
   <div class="detail">
+
     <el-card :body-style="{ padding: '0px' }">
-      <img :src="detail.cover" class="image" width="200">
-      <div>
-        <span>{{detail.title}}</span>
+      <div class="poster">
+        <img :src="detail.cover" class="image" width="200">
+      </div>
+      <div class="detail-desc">
+        <span class="title">{{detail.title}}</span>
         <div class="bottom clearfix">
-          <time class="time">{{ currentDate }}</time>
+          <time class="time">{{ detail.currentDate }}</time>
+        </div>
+        <div class="directors">
+          {{ detail.directors }}
+        </div>
+        <div class="actors">
+          <ul>
+            <li v-for="item in detail.actors">
+              {{ item }}
+            </li>
+          </ul>
         </div>
       </div>
     </el-card>
-    {{ $route.params.id }}
   </div>
 </template>
 
@@ -45,33 +58,25 @@ export default {
 </script>
 
 <style lang="css">
-.time {
-    font-size: 13px;
-    color: #999;
+  .el-card{
+    padding: 20px;
   }
-
-  .bottom {
-    margin-top: 13px;
-    line-height: 12px;
+  .el-card__body{
+    display: flex;
   }
-
-  .button {
-    padding: 0;
-    float: right;
+  .title{
+    font-size: 16px;
+    color: #555555;
   }
-
+  .poster{
+    width: 400px;
+    margin-right: 20px;
+  }
   .image {
     width: 100%;
     display: block;
   }
-
-  .clearfix:before,
-  .clearfix:after {
-      display: table;
-      content: "";
-  }
-
-  .clearfix:after {
-      clear: both;
+  .actors li + li{
+    margin-top: 10px;
   }
 </style>
