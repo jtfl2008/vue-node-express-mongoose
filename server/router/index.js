@@ -1,6 +1,9 @@
 const express = require('express')
 const router = express.Router()
+const config = require('../config/config.js')
+const crypto = require('crypto')
 const Film = require('../models/films.js')
+const User = require('../models/user.js')
 
 // 添加电影
 router.all('/create', (req, res) => {
@@ -39,7 +42,7 @@ router.all('/lists', (req, res) => {
       Film.find(params)
         .skip((currentPage - 1) * pageSize)
         .limit(pageSize)
-        .sort({update_at: -1})
+        .sort({update_at: 1})
         .exec((err, lists) => {
           if (err) {
             res.json(err)
@@ -136,4 +139,72 @@ router.all('/remove', (req, res) => {
   })
 })
 
+// 注册
+router.all('/registe', (req, res) => {
+  User.find({username: req.body.username})
+  .sort({update_at: -1})
+  .then(doc => {
+    if (!doc.length) {
+      User.create(req.body, (err, doc) => {
+        if (err) {
+          res.json(err)
+        } else {
+          let params = {
+            'code': '200',
+            'message': '注册成功',
+            'data': doc.username
+          }
+          res.json(params)
+        }
+      })
+    } else {
+      let params = {
+        'code': '205',
+        'message': '该账号已被注册',
+        'data': ''
+      }
+      res.json(params)
+    }
+  }).catch(err => {
+    res.json(err)
+  })
+})
+// 登录
+router.all('/login', (req, res) => {
+  User.find({username: req.body.username})
+  .sort({update_at: -1})
+  .then(doc => {
+    if (doc.length) {
+      User.find({username: req.body.username})
+      .then(docPwd => {
+        function getCrypto (val) {
+          let md5 = crypto.createHash('md5')
+          return md5.update(val + config.secret).digest('hex')
+        }
+        if (docPwd.length && doc[0].password === getCrypto(req.body.password)) {
+          let params = {
+            'code': '200',
+            'message': '登录成功',
+            'data': docPwd[0]
+          }
+          res.json(params)
+        } else {
+          let params = {
+            'code': '400',
+            'message': '密码错误',
+            'data': ''
+          }
+          res.json(params)
+        }
+      })
+    } else {
+      let params = {
+        'code': '400',
+        'message': '用户名错误',
+        'data': ''
+      }
+      res.json(params)
+    }
+  })
+})
 module.exports = router
