@@ -17,11 +17,11 @@
     "axios": "^0.16.2",
     "body-parser": "^1.17.2",
     "cookie-parser": "^1.4.3",
-    "element-ui": "^1.4.4",
+    "element-ui": "^2.0.0-alpha.2",
     "mongoose": "^4.11.10",
-    "mongoose-auto-increment": "^5.0.1",
     "vue": "^2.4.2",
-    "vue-router": "^2.7.0"
+    "vue-router": "^2.7.0",
+    "vuex": "^3.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -54,7 +54,6 @@
     "http-proxy-middleware": "^0.17.3",
     "less": "^2.7.2",
     "less-loader": "^4.0.5",
-    "nodemon": "^1.11.0",
     "opn": "^5.1.0",
     "optimize-css-assets-webpack-plugin": "^2.0.0",
     "ora": "^1.2.0",
