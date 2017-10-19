@@ -1,0 +1,26 @@
+.main{
+  width: 1200px;
+  min-width:1200px;
+  margin: auto;
+}
+
+.form{
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.form-content{
+  width: 400px;
+  margin-top: 220px;
+  border: 1px solid #efefef;
+  padding: 15px;
+  box-shadow: 1px 3px 15px #efefef;
+}
+.form-content .form-item-btn{
+  width: 100%;
+}
+.form-content .form-item-btn .el-button{
+  width: 100%;
+  word-spacing: 10px;
+}
