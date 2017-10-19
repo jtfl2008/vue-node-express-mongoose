@@ -1,7 +1,7 @@
 const mongoose = require('./db.js')
-const Schemm = mongoose.Schema
+const Schema = mongoose.Schema
 
-/*const createAccountSchema = new Schemm({
+const createAccountSchema = new Schema({
   username: String,
   pass: String,
   phone: String,
@@ -20,4 +20,4 @@ const Schemm = mongoose.Schema
   }
 })
 
-module.exports = mongoose.model('account', createAccountSchema)*/
+module.exports = mongoose.model('account', createAccountSchema)
