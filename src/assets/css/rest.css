@@ -1,6 +1,7 @@
 @charset "utf-8";
 /*CSS reset*/
-body,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,form,input,textarea,select,button,p,span,img,th,td{ font:16px/24px "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif; margin:0; padding:0; vertical-align: baseline; color: #333; }
+body,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,form,input,textarea,select,button,p,span,img,th,td{ font-size:14px;font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif; margin:0; padding:0; vertical-align: baseline;}
+body{color: #333;}
 /*html5*/
 header,footer,section,article,aside,nav,hgroup,address,figure,figcaption,menu,details{ display:block; }
 /* 重置盒子模型 */
