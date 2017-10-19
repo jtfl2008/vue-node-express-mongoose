@@ -58,6 +58,7 @@ export function fetch (url, params) {
     })
   }
 }
+Vue.prototype.secret = 'vueNodeExpressMongooseLearn'
 export default fetch
 Vue.prototype.types = [{
   value: '全部类型',
