@@ -160,7 +160,6 @@ export default {
   name: 'home',
   data () {
     return {
-      activeIndex: '1',
       types: this.types,
       type: this.types[0].value,
       ratings: this.ratings,
@@ -262,7 +261,7 @@ export default {
           let params = this.addMovie
           this.$ajax('/api/create', params).then(res => {
             if (res.code === '200') {
-              this.$message.success('成功')
+              this.$message.success(res.message)
               this.dialogVisibleAddMovie = false
               this.getLists()
             }
@@ -355,6 +354,9 @@ export default {
     h4{
       font-weight: normal;
       line-height: 36px;
+    }
+    .el-radio-button__inner{
+      padding: 8px 10px;
     }
   }
 }
