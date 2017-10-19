@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/components/Home'
-import Detail from '@/components/Detail'
-
 Vue.use(Router)
-
+let Home = resolve => require(['@/pages/Home'], resolve)
+let Detail = resolve => require(['@/pages/Detail'], resolve)
+let Login = resolve => require(['@/pages/Login'], resolve)
+let Registe = resolve => require(['@/pages/Registe'], resolve)
 export default new Router({
   routes: [
     {
@@ -15,6 +15,14 @@ export default new Router({
       path: '/detail/:id',
       name: 'Detail',
       component: Detail
+    }, {
+      path: '/login',
+      name: 'Login',
+      component: Login
+    }, {
+      path: '/registe',
+      name: 'Registe',
+      component: Registe
     }
   ]
 })
