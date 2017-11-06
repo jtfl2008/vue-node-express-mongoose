@@ -4,7 +4,6 @@ const config = require('../config/config.js')
 const crypto = require('crypto')
 const Film = require('../models/films.js')
 const User = require('../models/user.js')
-
 // 添加电影
 router.all('/create', (req, res) => {
   // console.log(req.body)
@@ -169,6 +168,26 @@ router.all('/registe', (req, res) => {
     res.json(err)
   })
 })
+router.all('/checkLogin', (req, res) => {
+  if (req.cookies.userName) {
+    let params = {
+      'code': '200',
+      'message': '已登陆',
+      'data': {
+        userId: req.cookies.userId,
+        userName: req.cookies.userName
+      }
+    }
+    res.json(params)
+  } else {
+    let params = {
+      'code': '401',
+      'message': '未登陆',
+      'data': ''
+    }
+    res.json(params)
+  }
+})
 // 登录
 router.all('/login', (req, res) => {
   User.find({username: req.body.username})
@@ -182,6 +201,12 @@ router.all('/login', (req, res) => {
           return md5.update(val + config.secret).digest('hex')
         }
         if (docPwd.length && doc[0].password === getCrypto(req.body.password)) {
+          res.cookie('userName', docPwd[0].username, {
+            maxAge: 1000 * 60
+          })
+          res.cookie('userId', docPwd[0]._id, {
+            maxAge: 1000 * 60
+          })
           let params = {
             'code': '200',
             'message': '登录成功',
@@ -207,4 +232,14 @@ router.all('/login', (req, res) => {
     }
   })
 })
+router.all('/logout', (req, res) => {
+  res.clearCookie('userName', {maxAge: 0})
+  let params = {
+    'code': '200',
+    'message': '退出成功',
+    'data': ''
+  }
+  res.json(params)
+})
+
 module.exports = router
