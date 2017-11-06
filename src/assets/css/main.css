@@ -3,7 +3,6 @@
   min-width:1200px;
   margin: auto;
 }
-
 .form{
   border-radius: 2px;
   display: flex;
@@ -23,4 +22,31 @@
 .form-content .form-item-btn .el-button{
   width: 100%;
   word-spacing: 10px;
+}
+.form-tip{
+  text-align: right;
+  text-decoration: none;
+}
+.form-tip a{
+  color: #409EFF;
+}
+.el-menu.el-menu--horizontal .el-submenu{
+  float:right;
+}
+.el-menu.el-menu--horizontal .el-submenu .username{
+  color: #409EFF;
+  display: inline-block;
+  vertical-align: top;
+}
+.el-menu.el-menu--horizontal .el-menu-item.text-right{
+  float: right;
+}
+.el-menu--horizontal>.el-menu-item:first-child.is-active{
+  border-bottom: 0;
+}
+.movies-list .cell a{
+  color: #409EFF;
+}
+.movies-list .cell button:last-child span{
+  color: #fa5555;
 }
