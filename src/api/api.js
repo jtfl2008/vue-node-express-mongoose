@@ -4,10 +4,12 @@ import qs from 'qs'
 
 // 响应时间
 axios.defaults.timeout = 5000
-  // 配置请求头
+// 配置cookie
+axios.defaults.withCredentials = true
+// 配置请求头
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
-  // 配置接口地址
-// axios.defaults.baseURL = 'http://localhost:8010'
+// 配置接口地址
+axios.defaults.baseURL = 'api'
 
 // POST传参序列化(添加请求拦截器)
 axios.interceptors.request.use((config) => {
@@ -21,10 +23,11 @@ axios.interceptors.request.use((config) => {
 })
 // 返回状态判断(添加响应拦截器)
 axios.interceptors.response.use((res) => {
-  if (res.data.code !== '200') {
+  if (res.data.code === '200') {
+    return res
+  } else {
     return Promise.reject(res)
   }
-  return res
 }, (err) => {
   console.log('异常：' + err.message)
   return Promise.reject(err.message)
