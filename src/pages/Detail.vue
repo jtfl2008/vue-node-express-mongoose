@@ -103,7 +103,7 @@ export default {
       let params = {
         id: this.$route.params.id
       }
-      this.$ajax('/api/detail', params).then(res => {
+      this.$ajax('/detail', params).then(res => {
         if (res.code === '200') {
           this.detail = res.data
         }
