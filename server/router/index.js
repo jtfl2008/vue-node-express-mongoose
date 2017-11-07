@@ -202,10 +202,10 @@ router.all('/login', (req, res) => {
         }
         if (docPwd.length && doc[0].password === getCrypto(req.body.password)) {
           res.cookie('userName', docPwd[0].username, {
-            maxAge: 1000 * 60
+            maxAge: 1000 * 60 * 30
           })
           res.cookie('userId', docPwd[0]._id, {
-            maxAge: 1000 * 60
+            maxAge: 1000 * 60 * 30
           })
           let params = {
             'code': '200',
@@ -232,6 +232,7 @@ router.all('/login', (req, res) => {
     }
   })
 })
+// 登出
 router.all('/logout', (req, res) => {
   res.clearCookie('userName', {maxAge: 0})
   let params = {
@@ -241,5 +242,17 @@ router.all('/logout', (req, res) => {
   }
   res.json(params)
 })
-
+// 个人中心
+router.all('/userCenter', (req, res) => {
+  User.findById({_id: req.body.id})
+  .then(doc => {
+    let params = {
+      'code': '200',
+      'message': '获取成功',
+      'data': doc
+    }
+    res.json(params)
+    console.log(doc)
+  })
+})
 module.exports = router
