@@ -18,20 +18,20 @@ app.use(session({
   httpOnly: true
 }))
 app.use((req, res, next) => {
-	if (req.cookies.userName) {
-		next()
-	} else {
-		// 不需要登录的
-		if (req.originalUrl === '/api/lists' || req.originalUrl === '/api/login' || req.originalUrl === '/api/registe' || req.originalUrl === '/api/logout' ) {
-			next()
-		} else {
-			let params = {
-	      'code': '401',
-	      'message': '未登陆',
-	      'data': false
-	    }
-	    res.json(params)
-		}
+  if (req.cookies.userName) {
+    next()
+  } else {
+    // 不需要登录的
+    if (req.originalUrl === '/api/lists' || req.originalUrl === '/api/login' || req.originalUrl === '/api/registe' || req.originalUrl === '/api/logout') {
+      next()
+    } else {
+      let params = {
+        'code': '401',
+        'message': '未登陆',
+        'data': false
+      }
+      res.json(params)
+    }
   }
 })
 app.use('/api', index)
