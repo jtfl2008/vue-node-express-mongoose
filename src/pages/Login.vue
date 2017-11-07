@@ -10,7 +10,6 @@
         </el-form-item>
         <el-form-item class="form-item-btn">
           <el-button type="primary" @click="login" :disabled="isLogin">登 录</el-button>
-          <!-- <el-input></el-input>   -->
         </el-form-item>
         <el-form-item class="form-tip">
           还没有帐号？ <router-link to="/registe">立即注册</router-link>
@@ -69,7 +68,7 @@ export default {
           this.$ajax('/login', params).then(res => {
             if (res.code === '200') {
               let userInfo = res.data
-              // localStorage.setItem('userInfo', JSON.stringify(userInfo))
+              localStorage.setItem('userInfo', JSON.stringify(userInfo))
               this.$message.success(res.message)
               this.$router.push({name: 'Movies'})
             } else {
