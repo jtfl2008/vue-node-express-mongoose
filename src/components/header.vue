@@ -5,7 +5,7 @@
       <el-menu-item index="/movies">豆瓣电影</el-menu-item>
       <el-menu-item index="/books">豆瓣书籍</el-menu-item>
       <el-menu-item index="/musics">豆瓣音乐</el-menu-item>
-      <template  v-if="!isLongin" >
+      <template  v-if="!isLogin" >
         <el-menu-item class="text-right" index="/registe">注册</el-menu-item>
         <el-menu-item class="text-right" index="/login">登录</el-menu-item>
       </template>
@@ -20,31 +20,44 @@
 </template>
 
 <script>
+import {mapState} from 'Vuex'
 export default {
 
   name: 'header',
 
   data () {
     return {
-      isLongin: false,
-      username: '',
-      activeIndex: '/movies'
+      // isLongin: false,
+      // username: '',
+      activeIndex: this.$route.path
     }
   },
   mounted () {
-    this.isLogin()
+    // this.$store.dispatch('checkLogin')
+    this.checkLogin()
+  },
+  computed: {
+    /* username () {
+      return this.$store.state.username
+    },
+    isLogin () {
+      return this.$store.state.isLogin
+    } */
+
+    ...mapState(['username', 'isLogin'])
   },
   methods: {
-    isLogin () {
+    checkLogin () {
       this.$ajax('/checkLogin').then(res => {
         if (res.code === '200') {
-          this.username = res.data.userName
-          this.isLongin = true
+          // this.username = res.data.userName
+          // this.isLongin = true
+          this.$store.commit('userInfo', {userName: res.data.userName, isLogin: true})
         } else {
           this.$message.error(res.message)
         }
       }).catch(err => {
-        this.$message.error(err.message)
+        this.$message.error(err)
       })
     },
     logout () {
@@ -52,7 +65,9 @@ export default {
         if (res.code === '200') {
           this.$message.success(res.message)
           localStorage.removeItem('userInfo')
-          this.isLongin = false
+          this.$router.push({name: 'Movies'})
+          // this.isLongin = false
+          this.$store.commit('removeInfo', {userName: '', isLogin: false})
         } else {
           this.$message.error(res.message)
         }
