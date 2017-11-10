@@ -252,7 +252,44 @@ router.all('/userCenter', (req, res) => {
       'data': doc
     }
     res.json(params)
-    console.log(doc)
+  })
+})
+router.all('/update', (req, res) => {
+  Film.findOneAndUpdate({_id: req.body.id},
+    {$set: {title: req.body.title,
+      rating: req.body.rating,
+      poster: req.body.poster,
+      introduction: req.body.introduction
+    }}, {
+      new: true
+    }).then(movie => {
+      let params = {
+        'code': '200',
+        'message': '修改成功',
+        'data': movie
+      }
+      res.json(params)
+    }).catch(err => {
+      res.json(err)
+    })
+})
+router.all('/updateUser', (req, res) => {
+  User.findByIdAndUpdate({_id: req.body.id}, {$set: {
+    username: req.body.username,
+    gender: req.body.gender,
+    phone: req.body.phone,
+    email: req.body.email,
+    update_at: req.body.update_at
+  }})
+  .then(doc => {
+    let params = {
+      'code': '200',
+      'message': '修改成功',
+      'data': doc
+    }
+    res.json(params)
+  }).catch(err => {
+    res.json(err)
   })
 })
 module.exports = router
