@@ -22,7 +22,12 @@ app.use((req, res, next) => {
     next()
   } else {
     // 不需要登录的
-    if (req.originalUrl === '/api/lists' || req.originalUrl === '/api/login' || req.originalUrl === '/api/registe' || req.originalUrl === '/api/logout') {
+    if (req.originalUrl === '/api/lists' ||
+        req.originalUrl === '/api/login' ||
+        req.originalUrl === '/api/registe' ||
+        req.originalUrl === '/api/logout' ||
+        req.originalUrl === '/api/detail'
+        ) {
       next()
     } else {
       let params = {
