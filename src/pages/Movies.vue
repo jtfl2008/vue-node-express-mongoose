@@ -68,11 +68,13 @@
 		         >
 		       </el-table-column>
 		       <el-table-column
-		         prop="rate"
+		         
 		         label="评分"
 		         width="80"
 		         >
-		         
+             <template scope="scope">
+                <Star :value="Math.round(scope.row.rate/10*5)" :disabled="true"></Star>
+             </template>
 		       </el-table-column>
 		       <el-table-column
 		         label="操作">
@@ -153,6 +155,7 @@
 </template>
 
 <script>
+import Star from '../components/Star.vue'
 export default {
   name: 'home',
   data () {
@@ -199,6 +202,9 @@ export default {
       currentPage: 1,
       loading: false
     }
+  },
+  components: {
+    Star
   },
   mounted () {
     this.getLists()

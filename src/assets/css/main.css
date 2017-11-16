@@ -3,6 +3,10 @@
   min-width:1200px;
   margin: auto;
 }
+.logo:after {
+  content: '11111';
+  
+}
 .form{
   border-radius: 2px;
   display: flex;
@@ -44,9 +48,23 @@
 .el-menu--horizontal>.el-menu-item:first-child.is-active{
   border-bottom: 0;
 }
+.movies-list .body{
+  margin-top: 10px;
+}
 .movies-list .cell a{
   color: #409EFF;
 }
 .movies-list .cell button:last-child span{
   color: #fa5555;
+}
+.user-center{
+  margin-top: 10px;
+}
+.user-center .el-form{
+  width: 500px;
+}
+.user-center .userSettings{
+  border: 1px solid #409EFF;
+  color: #409EFF;
+  padding: 10px 30px;
 }

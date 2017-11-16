@@ -26,7 +26,8 @@ app.use((req, res, next) => {
         req.originalUrl === '/api/login' ||
         req.originalUrl === '/api/registe' ||
         req.originalUrl === '/api/logout' ||
-        req.originalUrl === '/api/detail'
+        req.originalUrl === '/api/detail' ||
+        req.originalUrl === '/api/checkUserName'
         ) {
       next()
     } else {

@@ -3,7 +3,7 @@
     <div class="form-content">
       <el-form :model="loginForm" :rules="loginFormRules" ref="loginForm"  label-width="80px">
         <el-form-item prop="username" label="账号">
-          <el-input :maxlength="35"  placeholder="请输入您的账号" v-model.trim="loginForm.username"></el-input>
+          <el-input :maxlength="35"  placeholder="请输入您的账号" v-model.trim="loginForm.username" ></el-input>
         </el-form-item>
         <el-form-item prop="password" label="密码">
           <el-input :maxlength="18"  type="password" placeholder="请输入您的密码" v-model.trim="loginForm.password" @keyup.enter.native="login"></el-input>
@@ -58,6 +58,9 @@ export default {
     }
   },
   methods: {
+    checkUser () {
+
+    },
     login () {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
@@ -68,7 +71,7 @@ export default {
           this.$ajax('/login', params).then(res => {
             if (res.code === '200') {
               let userInfo = res.data
-              localStorage.setItem('userInfo', JSON.stringify(userInfo))
+              // localStorage.setItem('userInfo', JSON.stringify(userInfo))
               this.$message.success(res.message)
               this.$router.push({name: 'Movies'})
             } else {

@@ -169,16 +169,21 @@ router.all('/registe', (req, res) => {
   })
 })
 router.all('/checkLogin', (req, res) => {
-  if (req.cookies.userName) {
-    let params = {
-      'code': '200',
-      'message': '已登陆',
-      'data': {
-        userId: req.cookies.userId,
-        userName: req.cookies.userName
+  if (req.cookies.userId) {
+    User.findById({_id: req.cookies.userId})
+    .then(doc => {
+      let params = {
+        'code': '200',
+        'message': '已登陆',
+        'data': {
+          userId: doc._id,
+          userName: doc.username
+        }
       }
-    }
-    res.json(params)
+      res.json(params)
+    }).catch(err => {
+      res.json(err)
+    })
   } else {
     let params = {
       'code': '401',
@@ -187,6 +192,28 @@ router.all('/checkLogin', (req, res) => {
     }
     res.json(params)
   }
+})
+// 判断用户名是否被占用
+router.all('/checkUserName', (req, res) => {
+  User.find({username: req.body.username})
+  .sort({update_at: -1})
+  .then(doc => {
+    if (doc.length) {
+      let params = {
+        'code': '400',
+        'message': '用户名已存在',
+        'data': ''
+      }
+      res.json(params)
+    } else {
+      let params = {
+        'code': '200',
+        'message': '用户名可以注册',
+        'data': ''
+      }
+      res.json(params)
+    }
+  })
 })
 // 登录
 router.all('/login', (req, res) => {
@@ -207,6 +234,7 @@ router.all('/login', (req, res) => {
           res.cookie('userId', docPwd[0]._id, {
             maxAge: 1000 * 60 * 30
           })
+          // docPwd[0].update_at = new Date()
           let params = {
             'code': '200',
             'message': '登录成功',
@@ -252,27 +280,11 @@ router.all('/userCenter', (req, res) => {
       'data': doc
     }
     res.json(params)
+  }).catch(err => {
+    res.json(err)
   })
 })
-router.all('/update', (req, res) => {
-  Film.findOneAndUpdate({_id: req.body.id},
-    {$set: {title: req.body.title,
-      rating: req.body.rating,
-      poster: req.body.poster,
-      introduction: req.body.introduction
-    }}, {
-      new: true
-    }).then(movie => {
-      let params = {
-        'code': '200',
-        'message': '修改成功',
-        'data': movie
-      }
-      res.json(params)
-    }).catch(err => {
-      res.json(err)
-    })
-})
+// 修改用户信息
 router.all('/updateUser', (req, res) => {
   User.findByIdAndUpdate({_id: req.body.id}, {$set: {
     username: req.body.username,

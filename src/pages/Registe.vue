@@ -9,7 +9,7 @@
           <el-input :maxlength="18"  type="password" placeholder="请输入您的密码" v-model.trim="loginForm.password" ></el-input>
         </el-form-item>
         <el-form-item prop="checkPass" label="确认密码">
-          <el-input :maxlength="18"  type="password" placeholder="请再次输入您的密码" v-model.trim="loginForm.checkPass" ></el-input>
+          <el-input :maxlength="18"  type="password" placeholder="请再次输入您的密码" v-model.trim="loginForm.checkPass" @keyup.enter.native="registe"></el-input>
         </el-form-item>
         <el-form-item class="form-item-btn">
           <el-button type="primary" @click="registe" :disabled="isLogin">注 册</el-button>
@@ -19,16 +19,14 @@
         </el-form-item>
       </el-form>
     </div>
-
   </div>
 </template>
 
 <script>
 import crypto from 'crypto'
+import _ from 'lodash'
 export default {
-
   name: 'register',
-
   data () {
     let checkPass = (rule, value, callback) => {
       if (value === '') {
@@ -40,7 +38,6 @@ export default {
       }
     }
     return {
-
       loginForm: {
         username: '',
         password: '',
@@ -62,10 +59,24 @@ export default {
         ]
       },
       isLogin: true
-
     }
   },
   watch: {
+    'loginForm.username': {
+      handler: _.debounce(function (newVal) {
+        let params = {
+          username: newVal
+        }
+        this.$ajax('/checkUserName', params).then(res => {
+          if (res.code !== '200') {
+            this.$message.error(res.message)
+          }
+        }).catch(res => {
+          this.$message.error(res)
+        })
+      }, 500),
+      deep: true
+    },
     loginForm: {
       handler: function (newVal) {
         if (newVal.username && newVal.username.length >= 2 && newVal.password && newVal.password.length >= 6) {
