@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-// import store from './store/store.js'
+import store from './store/index.js'
 import api from './api/api.js'
 import './assets/css/rest.css'
 Vue.prototype.$ajax = api
@@ -20,7 +20,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
-  // store,
+  store,
   template: '<App/>',
   components: { App }
 })
