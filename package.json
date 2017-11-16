@@ -19,10 +19,12 @@
     "cookie-parser": "^1.4.3",
     "element-ui": "^2.0.0-alpha.2",
     "express-session": "^1.15.6",
+    "lodash": "^4.17.4",
     "mongoose": "^4.11.10",
     "vue": "^2.4.2",
     "vue-router": "^2.7.0",
-    "vuex": "^3.0.0"
+    "vuex": "^3.0.0",
+    "vuex-persistedstate": "^2.3.2"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
