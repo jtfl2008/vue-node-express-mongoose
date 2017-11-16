@@ -13,9 +13,9 @@ axios.defaults.baseURL = 'api'
 
 // POST传参序列化(添加请求拦截器)
 axios.interceptors.request.use((config) => {
-  /* if (config.method === 'post') {
+  if (config.method === 'post') {
     config.data = qs.stringify(config.data)
-  } */
+  }
   return config
 }, (err) => {
   // console.log('错误的传参', 'fail')
@@ -63,8 +63,8 @@ export function fetch (url, params) {
     })
   }
 }
-Vue.prototype.secret = 'vueNodeExpressMongooseLearn'
 export default fetch
+Vue.prototype.secret = 'vueNodeExpressMongooseLearn'
 Vue.prototype.types = [{
   value: '全部类型',
   label: '全部类型'
