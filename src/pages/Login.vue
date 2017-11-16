@@ -46,6 +46,22 @@ export default {
     }
   },
   watch: {
+    'loginForm.username': {
+      handler: function (newVal) {
+        console.log(newVal)
+        let params = {
+          username: newVal
+        }
+        this.$ajax('/checkUserName', params).then(res => {
+          if (res.code !== '200') {
+            this.$message.error(res.message)
+          }
+        }).catch(res => {
+          this.$message.error(res)
+        })
+      },
+      deep: true
+    },
     loginForm: {
       handler: function (newVal) {
         if (newVal.username && newVal.username.length >= 2 && newVal.password && newVal.password.length >= 6) {
