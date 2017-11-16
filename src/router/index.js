@@ -8,6 +8,8 @@ let Musics = resolve => require(['@/pages/Musics'], resolve)
 let Detail = resolve => require(['@/pages/Detail'], resolve)
 let Login = resolve => require(['@/pages/Login'], resolve)
 let Registe = resolve => require(['@/pages/Registe'], resolve)
+let UserCenter = resolve => require(['@/pages/UserCenter'], resolve)
+let UserSettings = resolve => require(['@/pages/UserSettings'], resolve)
 export default new Router({
   routes: [{
     path: '/',
@@ -30,6 +32,14 @@ export default new Router({
       path: 'detail/:id',
       name: 'Detail',
       component: Detail
+    }, {
+      path: '/userCenter',
+      name: 'UserCenter',
+      component: UserCenter
+    }, {
+      path: '/userSettings',
+      name: 'UserSettings',
+      component: UserSettings
     }]
   }, {
     path: '/login',
