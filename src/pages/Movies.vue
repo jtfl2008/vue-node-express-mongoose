@@ -242,7 +242,7 @@ export default {
           // this.rating = this.ratings[0].value
         }
       }).catch(res => {
-        console.log(res)
+        this.$message.error(res.message)
       })
     },
     // 当前分页
