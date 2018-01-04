@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
-import Router from '../router/index.js'
-import api from '../api/api.js'
+// import Router from '../router/index.js'
+// import api from '../api/api.js'
 import { Message } from 'element-ui'
 Vue.use(Vuex)
 const state = {
