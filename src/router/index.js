@@ -11,6 +11,7 @@ let Registe = resolve => require(['@/pages/Registe'], resolve)
 let UserCenter = resolve => require(['@/pages/UserCenter'], resolve)
 let UserSettings = resolve => require(['@/pages/UserSettings'], resolve)
 export default new Router({
+  mode: 'history',
   routes: [{
     path: '/',
     name: 'Home',
