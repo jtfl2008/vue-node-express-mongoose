@@ -234,7 +234,7 @@ router.all('/login', (req, res) => {
           res.cookie('userId', docPwd[0]._id, {
             maxAge: 1000 * 60 * 30
           })
-          // docPwd[0].update_at = new Date()
+          docPwd[0].update_at = Date.now
           let params = {
             'code': '200',
             'message': '登录成功',
